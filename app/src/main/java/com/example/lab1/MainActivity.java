@@ -17,22 +17,30 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Log.i(TAG, msg: "onCreate Called");
+        Log.i(TAG, "onCreate Called");
         setContentView(R.layout.activity_main);
 
         mButton = findViewById(R.id.btnLaunchActivity);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //launchDetailActivity("ETH");
             }
         });
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                launchDetailActivity("ETH");
+            }
+        });
+
+        /*mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 launchDetailActivity("Hello from DetailActivity *******************");
                 }
-            });
+            });*/
     }
 
     private void launchDetailActivity(String message){
@@ -41,17 +49,35 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    @Override
-//    protected void onStart(){
-//        super.onStart();
-//        Log.i(TAG, msg: "onStart Called");
-//    }
-//
-//    @Overrride
-//    protected void onResume(){
-//        super.onResume();
-//        Log.i(TAG, msg: "onResume Called");
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart Called");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume Called");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG, "onStop Called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "onPause Called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy Called");
+    }
 
 
 }
