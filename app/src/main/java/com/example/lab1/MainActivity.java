@@ -1,6 +1,8 @@
 package com.example.lab1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     public static final String EXTRA_MESSAGE = "au.edu.unsw.infs3624.beers.MESSAGE";
     private Button mButton;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,20 +25,41 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "onCreate Called");
         setContentView(R.layout.activity_main);
 
-        mButton = findViewById(R.id.btnLaunchActivity);
+        mRecyclerView = findViewById(R.id.cryptoList);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        CoinAdapter.RecyclerViewClickListener listener = new
+                CoinAdapter.RecyclerViewClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        launchDetailActivity(position);
+                    }
+                };
+
+        mAdapter = new CoinAdapter(Coin.getCoins(), listener);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void launchDetailActivity(int position){
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, position);
+        startActivity(intent);
+
+        /*mButton = findViewById(R.id.btnLaunchActivity);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //launchDetailActivity("ETH");
             }
-        });
+        });*/
 
-        mButton.setOnClickListener(new View.OnClickListener() {
+        /*mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launchDetailActivity("ETH");
             }
-        });
+        });*/
 
         /*mButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -74,13 +74,17 @@ public class DetailActivity extends AppCompatActivity {
         mSearch = findViewById(R.id.searchBtn);
 
         Intent intent = getIntent();
-        String coinSymbol = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        //String coinSymbol = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        int position = intent.getIntExtra(MainActivity.EXTRA_MESSAGE, 0);
+        //mCoin = Coin.getCoins().get(position);
 
-        Log.i(TAG, "Coin-Symbol = " + coinSymbol);
+        //Log.i(TAG, "Coin-Symbol = " + coinSymbol);
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
-        ArrayList<Coin> coins = Coin.getCoins();
+        //ArrayList<Coin> coins = Coin.getCoins();
 
-        final Coin coin = Coin.searchCoin(coinSymbol);
+
+
+        final Coin coin = Coin.getCoins().get(position);
 
         //final Coin coin = Coin.getCoins().get(0);
 
